@@ -1,5 +1,8 @@
 # React Native REST Client
 
+[![npm version](https://badge.fury.io/js/react-native-rest-client.svg)](https://badge.fury.io/js/react-native-rest-client)
+[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
+
 Simplify the RESTful calls of your React Native app.
 
 ## Instalation
@@ -81,19 +84,19 @@ export default class YourRestApi extends RestClient {
 
 You _must_ call the parent constructor as shown in the example above.
 
-| Parameter |  Type  | Required |  Default  |
-|:---------:|:------:|:--------:|:---------:|
-| baseUrl   | String |    Yes   | undefined |
-| options   | Object |    No    |     {}    |
+| Parameter   |  Type  | Required |  Default  |
+|:------------|:------:|:--------:|:---------:|
+| **baseUrl** | String |    Yes   | undefined |
+| **options** | Object |    No    |     {}    |
 
 #### options object
 
 Supports the following values
 
-|       Key      |  Type  | Required | Default |                                                                                                                                           Comments                                                                                                                                          |
-|:--------------:|:------:|:--------:|:-------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| headers        | String |    No    |    {}   | Headers to be appended to the request. RestApi will always include `Content-Type: application/json` and `Accept: application/json`.                                                                                                                                                         |
-| simulatedDelay | Number |    No    |    0    | Useful for simulating a slow connection. Number of milliseconds to wait before making the request. NOTE: in React Native apps it will only take effect while developing. It internally checks the __DEV__ global variable to figure the environment. It won't delay requests in production. |
+|       Key          |  Type  | Required | Default |                                                                                                                                           Comments                                                                                                                                          |
+|:-------------------|:------:|:--------:|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **headers**        | String |    No    |    {}   | Headers to be appended to the request. RestApi will always include `Content-Type: application/json` and `Accept: application/json`.                                                                                                                                                         |
+| **simulatedDelay** | Number |    No    |    0    | Useful for simulating a slow connection. Number of milliseconds to wait before making the request. NOTE: in React Native apps it will only take effect while developing. It internally checks the __DEV__ global variable to figure the environment. It won't delay requests in production. |
 
 ### this.GET(route [, queryObject])
 ### this.POST(route [, body])
@@ -102,11 +105,11 @@ Supports the following values
 
 Each one of these methods returns a Promise with the response as the parameter.
 
-|  Parameter  |  Type  | Required | Default |                            Comments                            |
-|:-----------:|:------:|:--------:|:-------:|:--------------------------------------------------------------:|
-| route       | String |    Yes   |    ''   | Partial route to be appended to the baseUrl                    |
-| queryObject | Object |    No    |    {}   | Object to be encoded and appended as the query part to the URL |
-| body        | Object |    No    |    {}   | Data to be sent as the JSON body of the message                |
+|  Parameter      |  Type  | Required | Default |                            Comments                            |
+|:----------------|:------:|:--------:|:-------:|:---------------------------------------------------------------|
+| **route**       | String |    Yes   |    ''   | Partial route to be appended to the baseUrl                    |
+| **queryObject** | Object |    No    |    {}   | Object to be encoded and appended as the query part to the URL |
+| **body**        | Object |    No    |    {}   | Data to be sent as the JSON body of the message                |
 
 ## Limitations
 
