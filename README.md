@@ -98,18 +98,18 @@ Supports the following values
 | **headers**        | String |    No    |    {}   | Headers to be appended to the request. RestApi will always include `Content-Type: application/json` and `Accept: application/json`.                                                                                                                                                         |
 | **simulatedDelay** | Number |    No    |    0    | Useful for simulating a slow connection. Number of milliseconds to wait before making the request. NOTE: in React Native apps it will only take effect while developing. It internally checks the __DEV__ global variable to figure the environment. It won't delay requests in production. |
 
-### this.GET(route [, queryObject])
+### this.GET(route [, query])
 ### this.POST(route [, body])
 ### this.PUT(route [, body])
-### this.DELETE(route [, queryObject])
+### this.DELETE(route [, query])
 
 Each one of these methods returns a Promise with the response as the parameter.
 
-|  Parameter      |  Type  | Required | Default |                            Comments                            |
-|:----------------|:------:|:--------:|:-------:|:---------------------------------------------------------------|
-| **route**       | String |    Yes   |    ''   | Partial route to be appended to the baseUrl                    |
-| **queryObject** | Object |    No    |    {}   | Object to be encoded and appended as the query part to the URL |
-| **body**        | Object |    No    |    {}   | Data to be sent as the JSON body of the message                |
+|  Parameter |  Type  | Required | Default |                            Comments                            |
+|:-----------|:------:|:--------:|:-------:|:---------------------------------------------------------------|
+| **route**  | String |    Yes   |    ''   | Partial route to be appended to the baseUrl                    |
+| **query**  | Object |    No    |    {}   | Object to be encoded and appended as the query part to the URL |
+| **body**   | Object |    No    |    {}   | Data to be sent as the JSON body of the message                |
 
 ## Limitations
 
