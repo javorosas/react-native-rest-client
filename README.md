@@ -114,10 +114,10 @@ Each one of these methods returns a Promise with the response as the parameter.
 ## Limitations
 
 * This library only supports JSON request and response bodies. If the response is not
-a JSON object, it will throw an JSON parse error.
+a JSON object, it will throw a JSON parse error.
 * It is labeled as _React Native_, even when it has no RN dependencies and could (in theory)
 be used in any JavaScript project. The reason behind this is that the stack used (ES2015,
-`fetch` and the `__DEV__` environment variable) comes out of the box with React Native, and
+`fetch` and the `__DEV__` global variable) comes out of the box with React Native, and
 adding support for more platforms would require to add compilers, polyfills and other
 tricks, which are completely out of the scope of this library. If you know what you're
 doing though, feel free to tweak your stack and use this library.
