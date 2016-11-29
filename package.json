@@ -1,6 +1,6 @@
 {
   "name": "react-native-rest-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Your REST client for React Native made easy",
   "main": "index.js",
   "scripts": {
