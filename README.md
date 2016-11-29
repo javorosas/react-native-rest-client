@@ -40,7 +40,8 @@ export default class YourRestApi extends RestClient {
 Then you can use your custom client like this
 
 ```javascript
-YourRestApi.login('johndoe', 'p4$$w0rd')
+const api = new YourRestApi();
+api.login('johndoe', 'p4$$w0rd')
   .then(response => response.token)   // Successfully logged in
   .then(token => saveToken(token))    // Remember your credentials
   .catch(err => alert(err.message));  // Catch any error
