@@ -1,6 +1,6 @@
 /* globals fetch __DEV__ */
 
-export default class RestApi {
+export default class RestClient {
   constructor (baseUrl = '', { headers = {}, simulatedDelay = 0 }) {
     if (!baseUrl) throw new Error('missing baseUrl');
     this.headers = {
