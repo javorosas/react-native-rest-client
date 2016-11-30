@@ -1,7 +1,7 @@
 /* globals fetch __DEV__ */
 
 export default class RestClient {
-  constructor (baseUrl = '', { headers = {}, simulatedDelay = 0 }) {
+  constructor (baseUrl = '', { headers = {}, simulatedDelay = 0 } = {}) {
     if (!baseUrl) throw new Error('missing baseUrl');
     this.headers = {
       'Accept': 'application/json',
@@ -31,9 +31,17 @@ export default class RestClient {
       var qs = require('qs');
       const query = qs.stringify(body);
       fullRoute = `${fullRoute}?${query}`;
-      body = {};
+      body = undefined;
     }
-    const fetchPromise = () => fetch(fullRoute, { method, body: JSON.stringify(body), headers: this.headers });
+    let opts = {
+      method,
+      headers: this.headers
+    };
+    if (body) {
+      Object.assign(opts, { body: JSON.stringify(body) });
+    }
+    console.log('opts', opts);
+    const fetchPromise = () => fetch(fullRoute, opts);
     if (__DEV__) {
       // Simulate a 2 second delay in evry request
       return this._simulateDelay()
@@ -45,7 +53,7 @@ export default class RestClient {
     }
   }
 
-  GET (route, query) { return this._fetch(route, 'GET', true); }
+  GET (route, query) { return this._fetch(route, 'GET', query, true); }
   POST (route, body) { return this._fetch(route, 'POST', body); }
   PUT (route, body) { return this._fetch(route, 'PUT', body); }
   DELETE (route, query) { return this._fetch(route, 'DELETE', query, true); }
