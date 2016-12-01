@@ -40,10 +40,9 @@ export default class RestClient {
     if (body) {
       Object.assign(opts, { body: JSON.stringify(body) });
     }
-    console.log('opts', opts);
     const fetchPromise = () => fetch(fullRoute, opts);
     if (__DEV__) {
-      // Simulate a 2 second delay in evry request
+      // Simulate a 2 second delay in every request
       return this._simulateDelay()
         .then(() => fetchPromise())
         .then(response => response.json());
