@@ -1,7 +1,5 @@
-/* globals fetch __DEV__ */
-
 export default class RestClient {
-  constructor (baseUrl = '', { headers = {}, simulatedDelay = 0 } = {}) {
+  constructor (baseUrl = '', { headers = {}, devMode = false, simulatedDelay = 0 } = {}) {
     if (!baseUrl) throw new Error('missing baseUrl');
     this.headers = {
       'Accept': 'application/json',
@@ -41,8 +39,8 @@ export default class RestClient {
       Object.assign(opts, { body: JSON.stringify(body) });
     }
     const fetchPromise = () => fetch(fullRoute, opts);
-    if (__DEV__) {
-      // Simulate a 2 second delay in every request
+    if (devMode && this.simulatedDelay > 0) {
+      // Simulate an n-second delay in every request
       return this._simulateDelay()
         .then(() => fetchPromise())
         .then(response => response.json());

@@ -65,6 +65,7 @@ export default class YourRestApi extends RestClient {
       },
       // Simulate a slow connection on development by adding
       // a 2 second delay before each request.
+      devMode: __DEV_,
       simulatedDelay: 2000
     });
   }
@@ -94,10 +95,11 @@ You _must_ call the parent constructor as shown in the example above.
 
 Supports the following values
 
-|       Key          |  Type  | Required | Default |                                                                                                                                           Comments                                                                                                                                          |
-|:-------------------|:------:|:--------:|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **headers**        | String |    No    |    {}   | Headers to be appended to the request. RestApi will always include `Content-Type: application/json` and `Accept: application/json`.                                                                                                                                                         |
-| **simulatedDelay** | Number |    No    |    0    | Useful for simulating a slow connection. Number of milliseconds to wait before making the request. NOTE: in React Native apps it will only take effect while developing. It internally checks the __DEV__ global variable to figure the environment. It won't delay requests in production. |
+|       Key          |   Type  | Required | Default |                                                                                                                                           Comments                                                                                                                                          |
+|:-------------------|:-------:|:--------:|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **headers**        | String  |    No    |    {}   | Headers to be appended to the request. RestApi will always include `Content-Type: application/json` and `Accept: application/json`.                                                                                                                                                         |
+| **devMode**        | Boolean |    No    |  false  | When true, it enables the simulatedDelay.
+| **simulatedDelay** | Number  |    No    |    0    | Useful for simulating a slow connection. Number of milliseconds to wait before making the request. NOTE: It will only take effect if devMode is true.
 
 ### this.GET(route [, query])
 ### this.POST(route [, body])
@@ -117,9 +119,9 @@ Each one of these methods returns a Promise with the response as the parameter.
 * This library only supports JSON request and response bodies. If the response is not
 a JSON object, it will throw a JSON parse error.
 * It is labeled as _React Native_, even when it has no RN dependencies and could (in theory)
-be used in any JavaScript project. The reason behind this is that the stack used (ES2015,
-`fetch` and the `__DEV__` global variable) comes out of the box with React Native, and
-adding support for more platforms would require to add compilers, polyfills and other
+be used in any JavaScript project. The reason behind this is that the stack used (ES6 and
+`fetch`) comes out of the box with React Native, and
+adding support for more platforms would require to add pre-compilers, polyfills and other
 tricks, which are completely out of the scope of this library. If you know what you're
 doing though, feel free to tweak your stack and use this library.
 
