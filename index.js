@@ -8,6 +8,7 @@ export default class RestClient {
     Object.assign(this.headers, headers);
     this.baseUrl = baseUrl;
     this.simulatedDelay = simulatedDelay;
+    this.devMode = devMode;
   }
 
   _simulateDelay () {
@@ -39,7 +40,7 @@ export default class RestClient {
       Object.assign(opts, { body: JSON.stringify(body) });
     }
     const fetchPromise = () => fetch(fullRoute, opts);
-    if (devMode && this.simulatedDelay > 0) {
+    if (this.devMode && this.simulatedDelay > 0) {
       // Simulate an n-second delay in every request
       return this._simulateDelay()
         .then(() => fetchPromise())
