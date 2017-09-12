@@ -1,27 +1,24 @@
 {
   "name": "react-native-rest-client",
   "version": "0.1.1",
-  "description": "Your REST client for React Native made easy",
+  "description": "Your REST client for React made easy",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/javorosas/react-native-rest-client.git"
+    "url": "git+https://github.com/parrotmac/react-basic-rest-client.git"
   },
   "keywords": [
-    "react-native",
+    "react",
     "rest",
     "client"
   ],
-  "author": "Javier Rosas",
+  "author": "Javier Rosas, Isaac Parker",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/javorosas/react-native-rest-client/issues"
+    "url": "https://github.com/parrotmac/react-basic-rest-client/issues"
   },
-  "homepage": "https://github.com/javorosas/react-native-rest-client#readme",
-  "dependencies": {
-    "qs": "^6.3.0"
-  }
+  "homepage": "https://github.com/parrotmac/react-basic-rest-client#readme"
 }
