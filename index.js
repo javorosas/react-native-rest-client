@@ -11,6 +11,14 @@ export default class RestClient {
     this.devMode = devMode;
   }
 
+  _jsonToQueryString(json) {
+      return '?' + 
+          Object.keys(json).map(function(key) {
+              return encodeURIComponent(key) + '=' +
+                  encodeURIComponent(json[key]);
+          }).join('&');
+  }
+
   _simulateDelay () {
     return new Promise(resolve => {
       setTimeout(() => {
@@ -23,12 +31,11 @@ export default class RestClient {
     return `${this.baseUrl}${url}`;
   }
 
-  _fetch (route, method, body, isQuery = false) {
+  _fetch (route, method, body) {
     if (!route) throw new Error('Route is undefined');
     var fullRoute = this._fullRoute(route);
     if (isQuery && body) {
-      var qs = require('qs');
-      const query = qs.stringify(body);
+      const query = _jsonToQueryString(body);
       fullRoute = `${fullRoute}?${query}`;
       body = undefined;
     }
