@@ -1,5 +1,11 @@
+const fetch = require('react-native-cancelable-fetch');
+const uuidv4 = require('uuid/v4');
+const promiseTimeout = require('promise-timeout');
+const timeout = promiseTimeout.timeout;
+const TimeoutError = promiseTimeout.TimeoutError;
+
 export default class RestClient {
-  constructor (baseUrl = '', { headers = {}, devMode = false, simulatedDelay = 0 } = {}) {
+  constructor (baseUrl = '', { headers = {}, devMode = false, simulatedDelay = 0, timeout = 0 } = {}) {
     if (!baseUrl) throw new Error('missing baseUrl');
     this.headers = {
       'Accept': 'application/json',
@@ -9,6 +15,7 @@ export default class RestClient {
     this.baseUrl = baseUrl;
     this.simulatedDelay = simulatedDelay;
     this.devMode = devMode;
+    this.timeout = timeout;
   }
 
   _simulateDelay () {
@@ -39,7 +46,13 @@ export default class RestClient {
     if (body) {
       Object.assign(opts, { body: JSON.stringify(body) });
     }
-    const fetchPromise = () => fetch(fullRoute, opts);
+    const uuid = uuidv4();
+    let fetchPromise;
+    if (this.timeout) {
+      fetchPromise = () => timeout(fetch(fullRoute, opts, uuid), this.timeout);
+    } else {
+      fetchPromise = () => fetch(fullRoute, opts);
+    }
     if (this.devMode && this.simulatedDelay > 0) {
       // Simulate an n-second delay in every request
       return this._simulateDelay()
@@ -47,7 +60,13 @@ export default class RestClient {
         .then(response => response.json());
     } else {
       return fetchPromise()
-        .then(response => response.json());
+        .then(response => response.json())
+        .catch(e => {
+          if (e instanceof TimeoutError) {
+            fetch.abort(uuid);
+          }
+          throw e;
+        });
     }
   }
 
