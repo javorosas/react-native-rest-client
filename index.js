@@ -40,14 +40,17 @@ export default class RestClient {
       Object.assign(opts, { body: JSON.stringify(body) });
     }
     const fetchPromise = () => fetch(fullRoute, opts);
+    const extractResponse = response =>
+      response.text().then(text => text? JSON.parse(text) : undefined);
+
     if (this.devMode && this.simulatedDelay > 0) {
       // Simulate an n-second delay in every request
       return this._simulateDelay()
         .then(() => fetchPromise())
-        .then(response => response.json());
+        .then(extractResponse);
     } else {
       return fetchPromise()
-        .then(response => response.json());
+        .then(extractResponse);
     }
   }
 

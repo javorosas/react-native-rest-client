@@ -117,7 +117,7 @@ Each one of these methods returns a Promise with the response as the parameter.
 ## Limitations
 
 * This library only supports JSON request and response bodies. If the response is not
-a JSON object, it will throw a JSON parse error.
+a JSON object, it will throw a JSON parse error. If the response is empty, it will return undefined.
 * It is labeled as _React Native_, even when it has no RN dependencies and could (in theory)
 be used in any JavaScript project. The reason behind this is that the stack used (ES6 and
 `fetch`) comes out of the box with React Native, and
